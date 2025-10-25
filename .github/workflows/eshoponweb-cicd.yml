@@ -6,7 +6,8 @@ on: [push, workflow_dispatch]
 #Environment variables https://docs.github.com/en/actions/learn-github-actions/environment-variables
 env:
   RESOURCE-GROUP: learning-eshoponweb-gh
-  LOCATION: eastus
+  LOCATION: australiacentral
+  SKU: F1
   TEMPLATE-FILE: infra/webapp.bicep
   SUBSCRIPTION-ID: 7ca2398c-2b8d-4e5c-a20a-fa14fc40163c
   WEBAPP-NAME: eshoponweb-webapp-gh-learning
@@ -83,7 +84,7 @@ jobs:
         subscriptionId: ${{ env.SUBSCRIPTION-ID }}
         resourceGroupName: ${{ env.RESOURCE-GROUP }}
         template: bicep-template/webapp.bicep
-        parameters: 'webAppName=${{ env.WEBAPP-NAME }} location=${{ env.LOCATION }}'
+        parameters: 'webAppName=${{ env.WEBAPP-NAME }} location=${{ env.LOCATION }} sku=${{ env.SKU }}'
         deploymentMode: Validate
 
     - name: deploy
@@ -92,7 +93,7 @@ jobs:
         subscriptionId: ${{ env.SUBSCRIPTION-ID }}
         resourceGroupName: ${{ env.RESOURCE-GROUP }}
         template: bicep-template/webapp.bicep
-        parameters: 'webAppName=${{ env.WEBAPP-NAME }} location=${{ env.LOCATION }}'
+        parameters: 'webAppName=${{ env.WEBAPP-NAME }} location=${{ env.LOCATION }} sku=${{ env.SKU }}'
         failOnStdErr: false   
     
     # Publish website to Azure App Service (WebApp)
